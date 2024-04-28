@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import Selecfield from "./component/Selecfield";
-export default function Home() {
+import Selecfield from "@/app/component/Selecfield";
+export default function PageOne() {
   const router = useRouter();
   const [selectedOption, setSelectedOption] = useState<any>(null);
   interface optType {
@@ -25,26 +25,23 @@ export default function Home() {
     formState: { errors },
   } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    if (data?.banks && data.banks.value) {
-      console.log(data?.banks?.value);
-      switch (data?.banks?.value) {
-        case "chocolate":
-          console.log("Selected: Chocolate");
-          router.push("pages/bankone");
-          break;
-        case "strawberry":
-          console.log("Selected: Strawberry");
-          router.push("pages/banktwo");
-          break;
-        default:
-          console.log("Unknown selection");
-          break;
-      }
+    console.log(data?.banks?.value);
+    switch (data?.banks?.value) {
+      case "chocolate":
+        console.log("Selected: Chocolate");
+        router.push("form");
+      case "strawberry":
+        console.log("Selected: Strawberry");
+        router.push("form");
+        break;
+      default:
+        console.log("Unknown selection");
+        break;
     }
   };
 
   return (
-    <main className="flex bg-blue-400 h-[100vh] w-full items-center justify-center ">
+    <main className="flex bg-purple-400 h-[100vh] w-full items-center justify-center ">
       <div className="w-[50%] min-h-[250px] bg-white rounded-xl">
         <form
           onSubmit={handleSubmit(onSubmit)}
